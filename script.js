@@ -1,3 +1,55 @@
+// Theme Management
+const themeToggle = document.getElementById('theme-toggle');
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+// Check for saved theme preference or default to user's system preference
+const getCurrentTheme = () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        return savedTheme;
+    }
+    return prefersDarkScheme.matches ? 'dark' : 'light';
+};
+
+// Apply theme to the document
+const setTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    
+    // Update toggle icon
+    const icon = themeToggle.querySelector('i');
+    if (theme === 'dark') {
+        icon.className = 'fas fa-sun';
+        icon.setAttribute('title', 'Switch to light mode');
+    } else {
+        icon.className = 'fas fa-moon';
+        icon.setAttribute('title', 'Switch to dark mode');
+    }
+};
+
+// Toggle theme
+const toggleTheme = () => {
+    const currentTheme = getCurrentTheme();
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+};
+
+// Initialize theme
+const initTheme = () => {
+    const theme = getCurrentTheme();
+    setTheme(theme);
+};
+
+// Event listeners
+themeToggle.addEventListener('click', toggleTheme);
+
+// Listen for system theme changes
+prefersDarkScheme.addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+        setTheme(e.matches ? 'dark' : 'light');
+    }
+});
+
 // DOM Elements
 const menuToggle = document.getElementById('menu-toggle');
 const navMenu = document.getElementById('nav-menu');
@@ -160,7 +212,7 @@ skillItems.forEach(item => {
     });
 });
 
-// Smooth scroll to top functionality
+// Enhanced Scroll to Top functionality
 const scrollToTop = () => {
     window.scrollTo({
         top: 0,
@@ -168,51 +220,63 @@ const scrollToTop = () => {
     });
 };
 
-// Add scroll to top button when scrolling down
+// Create scroll progress bar
+const createScrollProgress = () => {
+    const progressBar = document.createElement('div');
+    progressBar.className = 'scroll-progress';
+    document.body.appendChild(progressBar);
+    return progressBar;
+};
+
+// Add scroll to top button and progress bar when scrolling down
 window.addEventListener('scroll', () => {
     const scrollTopBtn = document.querySelector('.scroll-top');
+    const progressBar = document.querySelector('.scroll-progress') || createScrollProgress();
+    
+    // Calculate scroll progress
+    const scrollTop = window.pageYOffset;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    
+    // Update progress bar
+    progressBar.style.width = scrollPercent + '%';
     
     if (window.scrollY > 500) {
         if (!scrollTopBtn) {
             const btn = document.createElement('button');
             btn.className = 'scroll-top';
             btn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-            btn.style.cssText = `
-                position: fixed;
-                bottom: 30px;
-                right: 30px;
-                width: 50px;
-                height: 50px;
-                background: var(--accent-color);
-                color: white;
-                border: none;
-                border-radius: 50%;
-                cursor: pointer;
-                font-size: 18px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                transition: all 0.3s ease;
-                z-index: 1000;
-            `;
+            btn.setAttribute('aria-label', 'Scroll to top');
             
             btn.addEventListener('click', scrollToTop);
-            btn.addEventListener('mouseenter', () => {
-                btn.style.transform = 'scale(1.1)';
-                btn.style.background = 'var(--dark-accent)';
-            });
-            btn.addEventListener('mouseleave', () => {
-                btn.style.transform = 'scale(1)';
-                btn.style.background = 'var(--accent-color)';
-            });
             
             document.body.appendChild(btn);
+            
+            // Add visible class after a small delay for animation
+            setTimeout(() => {
+                btn.classList.add('visible');
+            }, 100);
         }
     } else if (scrollTopBtn) {
-        scrollTopBtn.remove();
+        scrollTopBtn.classList.remove('visible');
+        setTimeout(() => {
+            if (scrollTopBtn.parentNode) {
+                scrollTopBtn.remove();
+            }
+        }, 400);
+    }
+    
+    // Hide progress bar when at top
+    if (scrollTop === 0) {
+        progressBar.style.width = '0%';
     }
 });
 
 // Initialize the page
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize theme
+    initTheme();
+    
     // Add loading animation
     document.body.style.opacity = '0';
     document.body.style.transition = 'opacity 0.5s ease';
