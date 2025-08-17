@@ -4,7 +4,6 @@ const navMenu = document.getElementById('nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 const sections = document.querySelectorAll('section');
 const skillLevels = document.querySelectorAll('.skill-level');
-const contactForm = document.getElementById('contact-form');
 
 // Mobile Menu Toggle
 menuToggle.addEventListener('click', () => {
@@ -67,20 +66,6 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Animate skill levels on scroll
-const animateSkills = () => {
-    skillLevels.forEach(skill => {
-        const level = skill.getAttribute('data-level');
-        const rect = skill.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-        
-        if (isVisible) {
-            skill.style.setProperty('--skill-width', `${level}%`);
-            skill.querySelector('::before').style.width = `${level}%`;
-        }
-    });
-};
-
 // Intersection Observer for skill animation
 const skillObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -88,208 +73,11 @@ const skillObserver = new IntersectionObserver((entries) => {
             const skill = entry.target;
             const level = skill.getAttribute('data-level');
             skill.style.setProperty('--skill-width', `${level}%`);
-            
-            // Animate the skill level bar
-            const skillBar = skill.querySelector('::before');
-            if (skillBar) {
-                skillBar.style.width = `${level}%`;
-            }
         }
     });
 }, { threshold: 0.5 });
 
 skillLevels.forEach(skill => skillObserver.observe(skill));
-
-// Form validation and submission
-if (contactForm) {
-    // Real-time validation
-    const inputs = contactForm.querySelectorAll('input, textarea');
-    inputs.forEach(input => {
-        input.addEventListener('blur', () => validateField(input));
-        input.addEventListener('input', () => clearFieldError(input));
-    });
-
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        if (!validateForm()) {
-            return;
-        }
-        
-        // Get form data
-        const formData = new FormData(contactForm);
-        const name = formData.get('name');
-        const email = formData.get('email');
-        const subject = formData.get('subject');
-        const message = formData.get('message');
-        
-        // Show loading state
-        const submitBtn = document.getElementById('submit-btn');
-        const btnText = submitBtn.querySelector('.btn-text');
-        const btnLoading = submitBtn.querySelector('.btn-loading');
-        
-        submitBtn.disabled = true;
-        btnText.style.display = 'none';
-        btnLoading.style.display = 'inline';
-        
-        // Simulate form submission
-        showNotification('Sending message...', 'info');
-        
-        try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            
-            showNotification('Message sent successfully!', 'success');
-            contactForm.reset();
-            clearAllErrors();
-        } catch (error) {
-            showNotification('Error sending message. Please try again.', 'error');
-        } finally {
-            submitBtn.disabled = false;
-            btnText.style.display = 'inline';
-            btnLoading.style.display = 'none';
-        }
-    });
-}
-
-// Form validation functions
-function validateField(field) {
-    const errorElement = document.getElementById(`${field.id}-error`);
-    let isValid = true;
-    let errorMessage = '';
-    
-    if (field.required && !field.value.trim()) {
-        isValid = false;
-        errorMessage = 'This field is required';
-    } else if (field.type === 'email' && field.value && !isValidEmail(field.value)) {
-        isValid = false;
-        errorMessage = 'Please enter a valid email address';
-    } else if (field.type === 'text' && field.value.length < 2) {
-        isValid = false;
-        errorMessage = 'This field must be at least 2 characters long';
-    }
-    
-    if (!isValid) {
-        errorElement.textContent = errorMessage;
-        field.classList.add('error');
-    } else {
-        errorElement.textContent = '';
-        field.classList.remove('error');
-    }
-    
-    return isValid;
-}
-
-function clearFieldError(field) {
-    const errorElement = document.getElementById(`${field.id}-error`);
-    errorElement.textContent = '';
-    field.classList.remove('error');
-}
-
-function validateForm() {
-    const inputs = contactForm.querySelectorAll('input, textarea');
-    let isValid = true;
-    
-    inputs.forEach(input => {
-        if (!validateField(input)) {
-            isValid = false;
-        }
-    });
-    
-    return isValid;
-}
-
-function clearAllErrors() {
-    const errorElements = contactForm.querySelectorAll('.form-error');
-    const inputs = contactForm.querySelectorAll('input, textarea');
-    
-    errorElements.forEach(error => error.textContent = '');
-    inputs.forEach(input => input.classList.remove('error'));
-}
-
-// Email validation function
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-// Notification system
-function showNotification(message, type = 'info') {
-    // Remove existing notifications
-    const existingNotification = document.querySelector('.notification');
-    if (existingNotification) {
-        existingNotification.remove();
-    }
-    
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.innerHTML = `
-        <div class="notification-content">
-            <span class="notification-message">${message}</span>
-            <button class="notification-close">&times;</button>
-        </div>
-    `;
-    
-    // Add styles
-    notification.style.cssText = `
-        position: fixed;
-        top: 100px;
-        right: 20px;
-        background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
-        color: white;
-        padding: 15px 20px;
-        border-radius: 5px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        z-index: 1000;
-        max-width: 300px;
-        animation: slideIn 0.3s ease;
-    `;
-    
-    // Add animation keyframes
-    if (!document.querySelector('#notification-styles')) {
-        const style = document.createElement('style');
-        style.id = 'notification-styles';
-        style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            .notification-content {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-            .notification-close {
-                background: none;
-                border: none;
-                color: white;
-                font-size: 20px;
-                cursor: pointer;
-                margin-left: 15px;
-            }
-        `;
-        document.head.appendChild(style);
-    }
-    
-    // Add to page
-    document.body.appendChild(notification);
-    
-    // Close button functionality
-    const closeBtn = notification.querySelector('.notification-close');
-    closeBtn.addEventListener('click', () => {
-        notification.remove();
-    });
-    
-    // Auto-remove after 5 seconds
-    setTimeout(() => {
-        if (notification.parentNode) {
-            notification.remove();
-        }
-    }, 5000);
-}
-
-
 
 // Scroll reveal animation for sections
 const revealSection = (entries, observer) => {
@@ -362,8 +150,6 @@ window.addEventListener('scroll', () => {
         homeImg.style.transform = `translateY(${rate}px)`;
     }
 });
-
-
 
 // Initialize tooltips for skill items
 const skillItems = document.querySelectorAll('.skill-item');
