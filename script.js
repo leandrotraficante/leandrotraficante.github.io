@@ -42,16 +42,15 @@ const applyLanguage = (lang) => {
 
 const initLanguage = () => {
     applyLanguage(currentLanguage);
-};
-
-document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const lang = btn.dataset.lang;
-        currentLanguage = lang;
-        localStorage.setItem('language', lang);
-        applyLanguage(lang);
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.dataset.lang;
+            currentLanguage = lang;
+            localStorage.setItem('language', lang);
+            applyLanguage(lang);
+        });
     });
-});
+};
 
 // Theme Management
 const themeToggle = document.getElementById('theme-toggle');
