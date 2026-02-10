@@ -67,6 +67,7 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 2rem;
     z-index: 100;
     transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
 }
@@ -76,17 +77,51 @@ header{
     filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
 }
 
-.logo{
-    font-size: 3rem;
-    color: var(--accent-color);
-    font-weight: 800;
-    cursor: pointer;
-    transition: 0.5s ease;
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
-.logo:hover{
-    transform: scale(1.1);
-    color: var(--dark-accent);
+/* Language Toggle */
+.lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 1.5rem;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    color: var(--text-dark);
+    cursor: pointer;
+    font-weight: 500;
+    padding: 0.3rem 0.5rem;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+}
+
+.lang-btn:hover {
+    opacity: 1;
+}
+
+.lang-btn.active {
+    color: var(--accent-color);
+    opacity: 1;
+}
+
+.lang-sep {
+    color: var(--text-dark);
+    opacity: 0.5;
+}
+
+[data-theme="dark"] .lang-btn {
+    color: var(--text-light);
+}
+
+[data-theme="dark"] .lang-btn.active {
+    color: var(--accent-color);
 }
 
 /* Theme Toggle Button */
@@ -103,7 +138,6 @@ header{
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    margin-right: 2rem;
 }
 
 .theme-toggle:hover {
@@ -123,10 +157,15 @@ header{
     color: var(--light-bg);
 }
 
+nav {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
 nav a{
     font-size: 1.8rem;
     color: var(--text-dark);
-    margin-left: 4rem;
     font-weight: 500;
     transition: 0.3s ease;
     border-bottom: 3px solid transparent;
@@ -148,6 +187,13 @@ nav a.active{
 
 .menu-toggle:hover {
     color: var(--dark-accent);
+}
+
+/* Focus styles for accessibility */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 3px;
 }
 
 /* Section Styles */
@@ -847,14 +893,22 @@ section{
 .contact-container {
     display: flex;
     justify-content: center;
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
 .contact-info {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    width: 100%;
+}
+
+.contact-links {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 1.5rem;
+    align-self: start;
 }
 
 .contact-item {
@@ -886,6 +940,93 @@ section{
     color: var(--text-dark);
 }
 
+.contact-item h3 a {
+    color: inherit;
+}
+
+.contact-item h3 a:hover {
+    color: var(--accent-color);
+}
+
+/* Contact Form */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    border: 1px solid var(--border-color);
+}
+
+.contact-form h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.contact-form h3 i {
+    color: var(--accent-color);
+}
+
+.contact-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 1.6rem;
+    color: var(--text-dark);
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 1rem 1.5rem;
+    font-size: 1.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    background-color: var(--light-bg);
+    color: var(--text-dark);
+    transition: border-color 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--accent-color);
+}
+
+.contact-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.contact-form button {
+    align-self: flex-start;
+}
+
+.form-message {
+    font-size: 1.6rem;
+    padding: 1rem 0;
+}
+
+.form-message--success {
+    color: #22c55e;
+}
+
+.form-message--error {
+    color: #ef4444;
+}
+
+[data-theme="dark"] .form-message--success {
+    color: #4ade80;
+}
+
+[data-theme="dark"] .form-message--error {
+    color: #f87171;
+}
+
 /* Footer */
 .footer {
     background-color: var(--primary-color);
@@ -901,10 +1042,8 @@ section{
 
 .footer-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 2rem;
 }
 
 .footer p {
@@ -956,11 +1095,20 @@ section{
 
 @media(max-width: 995px){
     .menu-toggle {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .header-actions {
+        margin-left: auto;
     }
     
+    .lang-toggle {
+        font-size: 1.4rem;
+    }
+
     .theme-toggle {
-        margin-right: 1rem;
         width: 40px;
         height: 40px;
         font-size: 1.6rem;
@@ -1111,6 +1259,10 @@ section{
         width: 100%;
         text-align: center;
     }
+
+    .contact-info {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1170,6 +1322,10 @@ section{
     .contact-container {
         flex-direction: column;
         gap: 2rem;
+    }
+
+    .contact-info {
+        grid-template-columns: 1fr;
     }
 }
 

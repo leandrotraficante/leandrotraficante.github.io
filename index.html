@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Leandro Traficante - Backend Developer Portfolio. Specialized in Node.js, Express, MySQL, and MongoDB. Based in Buenos Aires, Argentina.">
+        content="Leandro Traficante - Backend Developer Portfolio. Specialized in Node.js, NestJS, TypeScript, Express, PostgreSQL and MongoDB. Based in Buenos Aires, Argentina.">
     <meta name="keywords"
-        content="Backend Developer, Node.js, Express, MySQL, MongoDB, JavaScript, Argentina, Portfolio">
+        content="Backend Developer, Node.js, NestJS, TypeScript, Express, MySQL, MongoDB, PostgreSQL, JavaScript, Argentina, Portfolio">
     <meta name="author" content="Leandro Traficante">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="Leandro Traficante - Backend Developer Portfolio">
-    <meta property="og:description" content="Backend Developer specialized in Node.js, Express, MySQL, and MongoDB">
+    <meta property="og:description" content="Backend Developer specialized in Node.js, NestJS, TypeScript, Express, PostgreSQL and MongoDB">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://leandrotraficante.github.io">
     <link rel="icon" type="image/x-icon"
@@ -23,35 +23,38 @@
 
 <body>
     <header>
-        <a href="https://leandrotraficante.github.io" class="logo">Leandro Traficante</a>
-
-        <!-- Dark Mode Toggle -->
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-            <i class="fas fa-moon"></i>
-        </button>
-
-        <div class="menu-toggle" id="menu-toggle">
-            <i class="fas fa-bars"></i>
-        </div>
-
         <nav id="nav-menu">
-            <a href="#home" class="nav-link active">About Me</a>
-            <a href="#skills" class="nav-link">Skills</a>
-            <a href="#education" class="nav-link">Education</a>
-            <a href="#experience" class="nav-link">Experience</a>
-            <a href="#projects" class="nav-link">Projects</a>
-            <a href="#contact" class="nav-link">Contact</a>
+            <a href="#home" class="nav-link active" data-i18n="nav.aboutMe">About Me</a>
+            <a href="#skills" class="nav-link" data-i18n="nav.skills">Skills</a>
+            <a href="#education" class="nav-link" data-i18n="nav.education">Education</a>
+            <a href="#experience" class="nav-link" data-i18n="nav.experience">Experience</a>
+            <a href="#projects" class="nav-link" data-i18n="nav.projects">Projects</a>
+            <a href="#contact" class="nav-link" data-i18n="nav.contact">Contact</a>
         </nav>
+
+        <div class="header-actions">
+            <div class="lang-toggle" id="lang-toggle" aria-label="Language">
+                <button type="button" class="lang-btn active" data-lang="en">EN</button>
+                <span class="lang-sep">|</span>
+                <button type="button" class="lang-btn" data-lang="es">ES</button>
+            </div>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Open menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
     </header>
 
     <section id="home" class="home">
         <div class="home-img">
-            <img src="LT.png" alt="Leandro Traficante Profile">
+            <img src="LT.png" alt="Leandro Traficante Profile" loading="lazy">
         </div>
         <div class="home-content">
-            <h1>Hi, I’m <span>Leandro</span></h1>
-            <h3><span>Backend Developer</span></h3>
-            <p>
+            <h1 data-i18n="home.greeting" data-i18n-html>Hi, I’m <span>Leandro</span></h1>
+            <h3><span data-i18n="home.title">Backend Developer</span></h3>
+            <p data-i18n="home.description">
                 Backend Developer with experience in Node.js, NestJS, TypeScript, Express, MongoDB, and PostgreSQL. 
                 Specialized in building scalable, well-organized backend architectures with clean code practices, 
                 modular design patterns, and maintainable systems. I prioritize robust database schemas, efficient 
@@ -59,22 +62,23 @@
                 Open to new challenges and opportunities.
             </p>
             <div class="social-icons">
-                <a href="https://linkedin.com/in/leandrotraficante/" target="_blank"><i
+                <a href="https://linkedin.com/in/leandrotraficante/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i
                         class="fa-brands fa-linkedin"></i></a>
-                <a href="https://github.com/leandrotraficante" target="_blank"><i class="fa-brands fa-github"></i></a>
-            </div <div class="btn-group">
-            <a href="#contact" class="btn">Contact Me</a>
+                <a href="https://github.com/leandrotraficante" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            </div>
+            <div class="btn-group">
+            <a href="#contact" class="btn" data-i18n="home.contactMe">Contact Me</a>
             <a href="https://drive.google.com/file/d/1w4wvYuAjJTHKYatUTF1JeY1d25Xdkf5e/view?usp=sharing"
-                class="btn btn-secondary" target="_blank">Download CV</a>
+                class="btn btn-secondary" target="_blank" rel="noopener noreferrer" data-i18n="home.downloadCV">Download CV</a>
         </div>
         </div>
     </section>
 
     <section id="skills" class="skills">
-        <h2 class="section-title">My <span>Skills</span></h2>
+        <h2 class="section-title" data-i18n="sectionTitles.skills" data-i18n-html>My <span>Skills</span></h2>
         <div class="skills-container">
             <div class="skill-category">
-                <h3>Programming Languages</h3>
+                <h3 data-i18n="skills.programming">Programming Languages</h3>
                 <div class="skill-items">
                     <div class="skill-item">
                         <i class="fab fa-js"></i>
@@ -89,7 +93,7 @@
                 </div>
             </div>
             <div class="skill-category">
-                <h3>Backend Technologies</h3>
+                <h3 data-i18n="skills.backend">Backend Technologies</h3>
                 <div class="skill-items">
                     <div class="skill-item">
                         <i class="fab fa-node-js"></i>
@@ -108,7 +112,7 @@
                 </div>
             </div>
             <div class="skill-category">
-                <h3>Databases</h3>
+                <h3 data-i18n="skills.databases">Databases</h3>
                 <div class="skill-items">
                     <div class="skill-item">
                         <i class="fas fa-database"></i>
@@ -125,7 +129,7 @@
                 </div>
             </div>
             <div class="skill-category">
-                <h3>Tools & Technologies</h3>
+                <h3 data-i18n="skills.tools">Tools & Technologies</h3>
                 <div class="skill-items">
                     <div class="skill-item">
                         <i class="fab fa-git-alt"></i>
@@ -141,31 +145,31 @@
     </section>
 
     <section id="education" class="education">
-        <h2 class="section-title">My <span>Education</span></h2>
+        <h2 class="section-title" data-i18n="sectionTitles.education" data-i18n-html>My <span>Education</span></h2>
         <div class="education-container">
             <div class="education-item">
                 <div class="education-content">
-                    <div class="education-year">Currently studying</div>
-                    <h3>University Technical Degree in Programming</h3>
+                    <div class="education-year" data-i18n="education.studying">Currently studying</div>
+                    <h3 data-i18n="education.degree">University Technical Degree in Programming</h3>
                     <h4>Universidad Tecnológica Nacional (UTN)</h4>
-                    <p>Technical degree focused on software programming and system development. Covers implementation and development of applications using various programming languages, methodologies, and technologies. Emphasizes collaborative work in development teams and technical documentation.</p>
+                    <p data-i18n="education.degreeDesc">Technical degree focused on software programming and system development. Covers implementation and development of applications using various programming languages, methodologies, and technologies. Emphasizes collaborative work in development teams and technical documentation.</p>
                 </div>
             </div>
             <div class="education-item">
                 <div class="education-content">
                     <div class="education-year">2024 - 2025</div>
-                    <h3>Full Stack Junior</h3>
+                    <h3 data-i18n="education.fullstack">Full Stack Junior</h3>
                     <h4>Universidad Tecnológica Nacional (UTN)</h4>
-                    <p>Full Stack development course with focus on HTML, CSS, JavaScript, React, Node.js,
+                    <p data-i18n="education.fullstackDesc">Full Stack development course with focus on HTML, CSS, JavaScript, React, Node.js,
                         and MongoDB.</p>
                 </div>
             </div>
             <div class="education-item">
                 <div class="education-content">
                     <div class="education-year">Feb 2023 - Feb 2024</div>
-                    <h3>Backend Development Bootcamp</h3>
+                    <h3 data-i18n="education.bootcamp">Backend Development Bootcamp</h3>
                     <h4>Coderhouse</h4>
-                    <p>Intensive program covering JavaScript, SQL (MySQL), MongoDB and Node.js. Obtained Backend
+                    <p data-i18n="education.bootcampDesc">Intensive program covering JavaScript, SQL (MySQL), MongoDB and Node.js. Obtained Backend
                         Developer
                         certification.</p>
                 </div>
@@ -173,9 +177,9 @@
             <div class="education-item">
                 <div class="education-content">
                     <div class="education-year">2023</div>
-                    <h3>JavaScript & SQL Certifications</h3>
+                    <h3 data-i18n="education.certs">JavaScript & SQL Certifications</h3>
                     <h4>Coderhouse</h4>
-                    <p>Completed specialized courses in JavaScript and SQL (MySQL) with practical projects and
+                    <p data-i18n="education.certsDesc">Completed specialized courses in JavaScript and SQL (MySQL) with practical projects and
                         assessments.</p>
                 </div>
             </div>
@@ -183,13 +187,13 @@
     </section>
 
     <section id="experience" class="experience">
-        <h2 class="section-title">My <span>Experience</span></h2>
+        <h2 class="section-title" data-i18n="sectionTitles.experience" data-i18n-html>My <span>Experience</span></h2>
         <div class="experience-container">
             <div class="experience-item">
-                <div class="experience-year">September 2025 - Present</div>
-                <h3>Freelance Developer</h3>
-                <h4>Personal Projects & Learning</h4>
-                <p>Building enterprise-level backend systems with NestJS and TypeScript. Developing scalable notification
+                <div class="experience-year" data-i18n="experience.period">September 2025 - Present</div>
+                <h3 data-i18n="experience.title">Freelance Developer</h3>
+                <h4 data-i18n="experience.subtitle">Personal Projects & Learning</h4>
+                <p data-i18n="experience.description">Building enterprise-level backend systems with NestJS and TypeScript. Developing scalable notification
                     engines, API integrations, and robust backend services. Focused on implementing resilience patterns,
                     event-driven architectures, multi-tenant systems, and comprehensive API documentation.</p>
                 <div class="experience-tech">
@@ -209,16 +213,16 @@
     </section>
 
     <section id="projects" class="projects">
-        <h2 class="section-title">My <span>Projects</span></h2>
+        <h2 class="section-title" data-i18n="sectionTitles.projects" data-i18n-html>My <span>Projects</span></h2>
         <div class="projects-container">
 
             <div class="project-item">
                 <div class="project-image">
-                    <img src="./notif.png" class="api-image" alt="Smart Event-Driven Notification Engine">
+                    <img src="./notif.png" class="api-image" alt="Smart Event-Driven Notification Engine" loading="lazy">
                 </div>
                 <div class="project-content">
-                    <h3>Smart Event-Driven Notification Engine</h3>
-                    <p>Multi-tenant notification system that automatically sends alerts for last-minute availability and
+                    <h3 data-i18n="projects.notif.title">Smart Event-Driven Notification Engine</h3>
+                    <p data-i18n="projects.notif.desc" data-i18n-html>Multi-tenant notification system that automatically sends alerts for last-minute availability and
                         opportunity events. Built with <strong>NestJS</strong> and <strong>TypeScript</strong>, uses <strong>PostgreSQL</strong> for data storage, processes
                         notifications asynchronously with <strong>Redis</strong> and <strong>BullMQ</strong>, and supports Email, Push, and WhatsApp channels.
                         Features automatic retry mechanisms, duplicate prevention, resilience patterns, and tenant isolation.</p>
@@ -237,7 +241,7 @@
                     <div class="project-links">
                         <a href="#" class="btn btn-small in-progress-btn"
                             style="opacity: 0.6; cursor: not-allowed; pointer-events: none;">
-                            <i class="fas fa-hard-hat"></i> In Progress
+                            <i class="fas fa-hard-hat"></i> <span data-i18n="projects.inProgress">In Progress</span>
                         </a>
                     </div>
                 </div>
@@ -245,11 +249,11 @@
 
             <div class="project-item">
                 <div class="project-image">
-                    <img src="./search-flight-service.webp" class="api-image" alt="Flights Search Service">
+                    <img src="./search-flight-service.webp" class="api-image" alt="Flights Search Service" loading="lazy">
                 </div>
                 <div class="project-content">
-                    <h3>Flights Search Service</h3>
-                    <p>Backend service for flight searches built with <strong>NestJS</strong> and <strong>TypeScript</strong>. Integrates with <strong>Amadeus API</strong> for
+                    <h3 data-i18n="projects.flight.title">Flights Search Service</h3>
+                    <p data-i18n="projects.flight.desc" data-i18n-html>Backend service for flight searches built with <strong>NestJS</strong> and <strong>TypeScript</strong>. Integrates with <strong>Amadeus API</strong> for
                         real-time flight data, uses <strong>Redis</strong> caching for faster repeated searches, and implements resilience
                         patterns with automatic retries and circuit breakers. Includes <strong>OAuth2</strong> authentication, structured
                         logging with <strong>Winston</strong>, and modular architecture.</p>
@@ -264,21 +268,21 @@
                         <span>OAuth2</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/leandrotraficante/flight-search-service" target="_blank"
-                            class="btn btn-small btn-secondary">View Code</a>
-                        <a href="https://flight-search-service-hlt3.onrender.com/" target="_blank"
-                            class="btn btn-small">Live Demo</a>
+                        <a href="https://github.com/leandrotraficante/flight-search-service" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-small btn-secondary" data-i18n="projects.viewCode">View Code</a>
+                        <a href="https://flight-search-service-hlt3.onrender.com/" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-small" data-i18n="projects.liveDemo">Live Demo</a>
                     </div>
                 </div>
             </div>
 
             <div class="project-item">
                 <div class="project-image">
-                    <img src="./calendario-medico-mutual-medica.png" alt="Turnos Médicos">
+                    <img src="./calendario-medico-mutual-medica.png" alt="Turnos Médicos" loading="lazy">
                 </div>
                 <div class="project-content">
-                    <h3>Medical Appointments System</h3>
-                    <p>Medical appointments management system built with <strong>Node.js</strong> and <strong>Express</strong>. Features <strong>JWT</strong> authentication,
+                    <h3 data-i18n="projects.medical.title">Medical Appointments System</h3>
+                    <p data-i18n="projects.medical.desc" data-i18n-html>Medical appointments management system built with <strong>Node.js</strong> and <strong>Express</strong>. Features <strong>JWT</strong> authentication,
                         role-based access control (Admin, Doctor, Patient), appointment scheduling, doctor-patient
                         management, specialty search, and user management. Uses <strong>MongoDB</strong> for data storage and follows <strong>MVC</strong>
                         architecture.</p>
@@ -290,10 +294,10 @@
                         <span>MVC</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/leandrotraficante/medical-appointments" target="_blank"
-                            class="btn btn-small btn-secondary">View Code</a>
-                        <a href="https://medical-appointments-vx8m.onrender.com/" target="_blank"
-                            class="btn btn-small">Live Demo</a>
+                        <a href="https://github.com/leandrotraficante/medical-appointments" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-small btn-secondary" data-i18n="projects.viewCode">View Code</a>
+                        <a href="https://medical-appointments-vx8m.onrender.com/" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-small" data-i18n="projects.liveDemo">Live Demo</a>
 
                     </div>
                 </div>
@@ -324,7 +328,7 @@
                     <div class="project-links">
                         <a href="#" class="btn btn-small in-progress-btn"
                             style="opacity: 0.6; cursor: not-allowed; pointer-events: none;">
-                            <i class="fas fa-hard-hat"></i> In Progress
+                            <i class="fas fa-hard-hat"></i> <span data-i18n="projects.inProgress">In Progress</span>
                         </a>
                         <a href="https://github.com/leandrotraficante/electro-commerce" target="_blank"
                             class="btn btn-small btn-secondary">View Code</a>
@@ -334,11 +338,11 @@
 
             <div class="project-item">
                 <div class="project-image">
-                    <img src="./API_books.png" class="api-image" alt="Personal Library API">
+                    <img src="./API_books.png" class="api-image" alt="Personal Library API" loading="lazy">
                 </div>
                 <div class="project-content">
-                    <h3>Personal Library API</h3>
-                    <p>REST API for managing a personal book library built with <strong>Node.js</strong> and <strong>Express</strong>. Features complete CRUD
+                    <h3 data-i18n="projects.library.title">Personal Library API</h3>
+                    <p data-i18n="projects.library.desc" data-i18n-html>REST API for managing a personal book library built with <strong>Node.js</strong> and <strong>Express</strong>. Features complete CRUD
                         operations with layered architecture, advanced search with combinable filters and pagination. Integrates with <strong>Google Books API</strong>
                         for importing titles, includes duplicate prevention, rating system (0-5), and reading status tracking. Uses <strong>MongoDB</strong>
                         with <strong>Mongoose</strong> and follows <strong>MVC</strong> architecture with repository pattern.</p>
@@ -352,8 +356,8 @@
                         <span>Repository Pattern</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/leandrotraficante/API_Biblioteca_Personal" target="_blank"
-                            class="btn btn-small btn-secondary">View Code</a>
+                        <a href="https://github.com/leandrotraficante/API_Biblioteca_Personal" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-small btn-secondary" data-i18n="projects.viewCode">View Code</a>
                     </div>
                 </div>
             </div>
@@ -366,30 +370,51 @@
 
 
     <section id="contact" class="contact">
-        <h2 class="section-title">Get In <span>Touch</span></h2>
+        <h2 class="section-title" data-i18n="sectionTitles.contact" data-i18n-html>Get In <span>Touch</span></h2>
         <div class="contact-container">
             <div class="contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <div>
-                        <h3>Email</h3>
-                        <p>leandrotraficante@hotmail.com</p>
+                <div class="contact-links">
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <h3><a href="https://wa.me/393792494488" id="whatsapp-link" target="_blank" rel="noopener noreferrer">WhatsApp</a></h3>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <div>
+                            <h3><a href="https://linkedin.com/in/leandrotraficante/" target="_blank" rel="noopener noreferrer">LinkedIn</a></h3>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <div>
+                            <h3><a href="https://github.com/leandrotraficante" target="_blank" rel="noopener noreferrer">GitHub</a></h3>
+                        </div>
                     </div>
                 </div>
-                <!-- <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <div>
-                        <h3>Phone</h3>
-                        <p>+54 9 11 5425-7143</p>
-                    </div>
-                </div> -->
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <div>
-                        <h3>Location</h3>
-                        <p>Buenos Aires, Argentina</p>
-                    </div>
-                </div>
+                <form class="contact-form" id="contact-form" action="https://formspree.io/f/xeeleqov" method="POST">
+                    <h3><i class="fas fa-envelope"></i> <span data-i18n="contact.formTitle">Contact Me</span></h3>
+                    <label for="contact-name">
+                        <span data-i18n="contact.name">Name</span>
+                        <input id="contact-name" type="text" name="name" required data-i18n-placeholder="contact.namePlaceholder" placeholder="Your name">
+                    </label>
+                    <label for="contact-email">
+                        <span data-i18n="contact.email">Email</span>
+                        <input id="contact-email" type="email" name="email" required data-i18n-placeholder="contact.emailPlaceholder" placeholder="you@example.com">
+                    </label>
+                    <label for="contact-subject">
+                        <span data-i18n="contact.subject">Subject</span>
+                        <input id="contact-subject" type="text" name="subject" required data-i18n-placeholder="contact.subjectPlaceholder" placeholder="What is it about?">
+                    </label>
+                    <label for="contact-message">
+                        <span data-i18n="contact.message">Message</span>
+                        <textarea id="contact-message" name="message" required data-i18n-placeholder="contact.messagePlaceholder" placeholder="Write your message here..."></textarea>
+                    </label>
+                    <button type="submit" class="btn" data-i18n="contact.send">Send</button>
+                    <p class="form-message form-message--success" id="form-success" hidden data-i18n="contact.successMsg">Message sent successfully</p>
+                    <p class="form-message form-message--error" id="form-error" hidden data-i18n="contact.errorMsg">An error occurred. Please try again.</p>
+                </form>
             </div>
 
         </div>
@@ -397,15 +422,11 @@
 
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2026 Leandro Traficante. All rights reserved.</p>
-            <div class="social-icons">
-                <a href="https://linkedin.com/in/leandrotraficante/" target="_blank"><i
-                        class="fa-brands fa-linkedin"></i></a>
-                <a href="https://github.com/leandrotraficante" target="_blank"><i class="fa-brands fa-github"></i></a>
-            </div>
+            <p data-i18n="footer.copyright">&copy; 2026 Leandro Traficante. All rights reserved.</p>
         </div>
     </footer>
 
+    <script src="translations.js"></script>
     <script src="script.js"></script>
 </body>
 

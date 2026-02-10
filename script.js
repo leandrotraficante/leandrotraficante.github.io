@@ -1,3 +1,58 @@
+// Language Management
+const getStoredLanguage = () => localStorage.getItem('language') || 'en';
+let currentLanguage = getStoredLanguage();
+
+const getNestedValue = (obj, path) => {
+    return path.split('.').reduce((o, k) => o?.[k], obj);
+};
+
+const applyLanguage = (lang) => {
+    const t = translations[lang];
+    if (!t) return;
+
+    currentLanguage = lang;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const value = getNestedValue(t, key);
+        if (value) {
+            if (el.hasAttribute('data-i18n-html')) {
+                el.innerHTML = value;
+            } else {
+                el.textContent = value;
+            }
+        }
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        const value = getNestedValue(t, key);
+        if (value) el.placeholder = value;
+    });
+
+    const whatsappLink = document.getElementById('whatsapp-link');
+    if (whatsappLink && t.whatsappMsg) {
+        whatsappLink.href = `https://wa.me/393792494488?text=${encodeURIComponent(t.whatsappMsg)}`;
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+};
+
+const initLanguage = () => {
+    applyLanguage(currentLanguage);
+};
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        currentLanguage = lang;
+        localStorage.setItem('language', lang);
+        applyLanguage(lang);
+    });
+});
+
 // Theme Management
 const themeToggle = document.getElementById('theme-toggle');
 const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
@@ -55,7 +110,6 @@ const menuToggle = document.getElementById('menu-toggle');
 const navMenu = document.getElementById('nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 const sections = document.querySelectorAll('section');
-const skillLevels = document.querySelectorAll('.skill-level');
 
 // Mobile Menu Toggle
 menuToggle.addEventListener('click', () => {
@@ -94,6 +148,14 @@ navLinks.forEach(link => {
                 top: targetPosition,
                 behavior: 'smooth'
             });
+
+            // Update active/aria-current on manual click
+            navLinks.forEach(l => {
+                l.classList.remove('active');
+                l.removeAttribute('aria-current');
+            });
+            link.classList.add('active');
+            link.setAttribute('aria-current', 'page');
         }
     });
 });
@@ -112,24 +174,14 @@ window.addEventListener('scroll', () => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === `#${sectionId}`) {
                     link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
+                } else {
+                    link.removeAttribute('aria-current');
                 }
             });
         }
     });
 });
-
-// Intersection Observer for skill animation
-const skillObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const skill = entry.target;
-            const level = skill.getAttribute('data-level');
-            skill.style.setProperty('--skill-width', `${level}%`);
-        }
-    });
-}, { threshold: 0.5 });
-
-skillLevels.forEach(skill => skillObserver.observe(skill));
 
 // Scroll reveal animation for sections
 const revealSection = (entries, observer) => {
@@ -203,15 +255,6 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Initialize tooltips for skill items
-const skillItems = document.querySelectorAll('.skill-item');
-skillItems.forEach(item => {
-    item.addEventListener('mouseenter', () => {
-        const level = item.querySelector('.skill-level').getAttribute('data-level');
-        item.setAttribute('title', `${level}% proficiency`);
-    });
-});
-
 // Enhanced Scroll to Top functionality
 const scrollToTop = () => {
     window.scrollTo({
@@ -242,12 +285,19 @@ window.addEventListener('scroll', () => {
     progressBar.style.width = scrollPercent + '%';
     
     if (window.scrollY > 500) {
-        if (!scrollTopBtn) {
-            const btn = document.createElement('button');
-            btn.className = 'scroll-top';
-            btn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-            btn.setAttribute('aria-label', 'Scroll to top');
-            
+            if (!scrollTopBtn) {
+                const btn = document.createElement('button');
+                btn.className = 'scroll-top';
+                btn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+
+                let label = 'Scroll to top';
+                const lang = currentLanguage || getStoredLanguage();
+                const common = translations?.[lang]?.common;
+                if (common?.scrollTopLabel) {
+                    label = common.scrollTopLabel;
+                }
+                btn.setAttribute('aria-label', label);
+
             btn.addEventListener('click', scrollToTop);
             
             document.body.appendChild(btn);
@@ -272,9 +322,44 @@ window.addEventListener('scroll', () => {
     }
 });
 
+// Contact form - submit via fetch to stay on page
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const successMsg = document.getElementById('form-success');
+        const errorMsg = document.getElementById('form-error');
+        
+        successMsg.hidden = true;
+        errorMsg.hidden = true;
+        submitBtn.disabled = true;
+        
+        try {
+            const formData = new FormData(contactForm);
+            const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+            
+            if (response.ok) {
+                successMsg.hidden = false;
+                contactForm.reset();
+            } else {
+                errorMsg.hidden = false;
+            }
+        } catch {
+            errorMsg.hidden = false;
+        } finally {
+            submitBtn.disabled = false;
+        }
+    });
+}
+
 // Initialize the page
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize theme
+    initLanguage();
     initTheme();
     
     // Add loading animation
@@ -285,11 +370,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.opacity = '1';
     }, 100);
     
-    // Initialize skill levels
-    skillLevels.forEach(skill => {
-        const level = skill.getAttribute('data-level');
-        skill.style.setProperty('--skill-width', '0%');
-    });
-    
-    console.log('Portfolio website initialized successfully!');
+    // Initialize aria-current on first active nav link
+    const initialActive = document.querySelector('.nav-link.active');
+    if (initialActive) {
+        initialActive.setAttribute('aria-current', 'page');
+    }
 });
