@@ -11,7 +11,7 @@ const translations = {
         home: {
             greeting: 'Hi, I\'m <span>Leandro</span>',
             title: 'Backend Developer',
-            description: 'Backend Developer with experience in Node.js, NestJS, TypeScript, Express, MongoDB, and PostgreSQL. Specialized in building scalable, well-organized backend architectures with clean code practices, modular design patterns, and maintainable systems. I prioritize robust database schemas, efficient API designs, performance optimization, and following best practices to create enterprise-level solutions. Open to new challenges and opportunities.',
+            description: 'Backend Developer who approaches development from a systems and product perspective. I design backend solutions with scalability and real-world usage in mind, while keeping implementation practical and efficient. I value clear structure, separation of concerns, and solid database design. My goal is to build reliable backend systems that support business growth without slowing down execution.',
             contactMe: 'Contact Me',
             downloadCV: 'Download CV'
         },
@@ -52,15 +52,18 @@ const translations = {
             },
             flight: {
                 title: 'Flights Search Service',
-                desc: 'Backend service for flight searches built with <strong>NestJS</strong> and <strong>TypeScript</strong>. Integrates with <strong>Amadeus API</strong> for real-time flight data, uses <strong>Redis</strong> caching for faster repeated searches, and implements resilience patterns with automatic retries and circuit breakers. Includes <strong>OAuth2</strong> authentication, structured logging with <strong>Winston</strong>, and modular architecture.'
+                desc: 'Backend service for flight searches built with <strong>NestJS</strong> and <strong>TypeScript</strong>. Integrates with <strong>Amadeus API</strong> for real-time flight data, uses <strong>Redis</strong> caching for faster repeated searches, and implements resilience patterns with automatic retries and circuit breakers. Includes <strong>OAuth2</strong> authentication, structured logging with <strong>Winston</strong>, and modular architecture.',
+                impact: '<strong>Impact:</strong> Reduced response time for repeated identical searches from ~10s to ~300ms (≈97% improvement) and minimized redundant external API calls through a Redis caching layer.'
             },
             medical: {
                 title: 'Medical Appointments System',
-                desc: 'Medical appointments management system built with <strong>Node.js</strong> and <strong>Express</strong>. Features <strong>JWT</strong> authentication, role-based access control (Admin, Doctor, Patient), appointment scheduling, doctor-patient management, specialty search, and user management. Uses <strong>MongoDB</strong> for data storage and follows <strong>MVC</strong> architecture.'
+                desc: 'Medical appointments management system built with <strong>Node.js</strong> and <strong>Express</strong>. Supports role-based access (Admin, Doctor, Patient), appointment scheduling workflows, and structured doctor–patient management. Uses <strong>MongoDB</strong> for data persistence and follows <strong>MVC</strong> architecture.',
+                objective: '<strong>Objective:</strong> Design a secure and structured appointment management system with clear role boundaries and maintainable separation of concerns.'
             },
             library: {
                 title: 'Personal Library API',
-                desc: 'REST API for managing a personal book library built with <strong>Node.js</strong> and <strong>Express</strong>. Features complete CRUD operations with layered architecture, advanced search with combinable filters and pagination. Integrates with <strong>Google Books API</strong> for importing titles, includes duplicate prevention, rating system (0-5), and reading status tracking. Uses <strong>MongoDB</strong> with <strong>Mongoose</strong> and follows <strong>MVC</strong> architecture with repository pattern.'
+                desc: 'REST API for managing a personal book library built with <strong>Node.js</strong> and <strong>Express</strong>. Includes advanced filtering, pagination, external book import via <strong>Google Books API</strong>, and structured data modeling with <strong>MongoDB</strong> and <strong>Mongoose</strong>.',
+                objective: '<strong>Objective:</strong> Build a modular and extensible API with clear separation between business logic and data access, enabling flexible queries and maintainable system evolution.'
             },
             inProgress: 'In Progress',
             viewCode: 'View Code',
@@ -100,7 +103,7 @@ const translations = {
         home: {
             greeting: 'Hola, soy <span>Leandro</span>',
             title: 'Backend Developer',
-            description: 'Backend Developer con experiencia en Node.js, NestJS, TypeScript, Express, MongoDB y PostgreSQL. Especializado en construir arquitecturas backend escalables y bien organizadas con prácticas de código limpio, patrones de diseño modulares y sistemas mantenibles. Priorizo esquemas de base de datos robustos, diseños de API eficientes, optimización de rendimiento y mejores prácticas para crear soluciones de nivel empresarial. Abierto a nuevos desafíos y oportunidades.',
+            description: 'Backend Developer que aborda el desarrollo desde una perspectiva de sistemas y producto. Diseño soluciones backend pensando en escalabilidad y uso real, manteniendo la implementación práctica y eficiente. Valoro la estructura clara, la separación de responsabilidades y un diseño de base de datos sólido. Mi objetivo es construir sistemas backend confiables que apoyen el crecimiento del negocio sin frenar la ejecución.',
             contactMe: 'Contactarme',
             downloadCV: 'Descargar CV'
         },
@@ -141,15 +144,18 @@ const translations = {
             },
             flight: {
                 title: 'Servicio de Búsqueda de Vuelos',
-                desc: 'Servicio backend para búsqueda de vuelos construido con <strong>NestJS</strong> y <strong>TypeScript</strong>. Integra <strong>Amadeus API</strong> para datos de vuelos en tiempo real, usa caché <strong>Redis</strong> para búsquedas repetidas más rápidas, e implementa patrones de resiliencia con reintentos automáticos y circuit breakers. Incluye autenticación <strong>OAuth2</strong>, logging estructurado con <strong>Winston</strong> y arquitectura modular.'
+                desc: 'Servicio backend para búsqueda de vuelos construido con <strong>NestJS</strong> y <strong>TypeScript</strong>. Integra <strong>Amadeus API</strong> para datos de vuelos en tiempo real, usa caché <strong>Redis</strong> para búsquedas repetidas más rápidas, e implementa patrones de resiliencia con reintentos automáticos y circuit breakers. Incluye autenticación <strong>OAuth2</strong>, logging estructurado con <strong>Winston</strong> y arquitectura modular.',
+                impact: '<strong>Impacto:</strong> Reducción del tiempo de respuesta en búsquedas idénticas repetidas de ~10s a ~300ms (≈97% de mejora) y minimización de llamadas redundantes a la API externa mediante una capa de caché en Redis.'
             },
             medical: {
                 title: 'Sistema de Turnos Médicos',
-                desc: 'Sistema de gestión de turnos médicos construido con <strong>Node.js</strong> y <strong>Express</strong>. Incluye autenticación <strong>JWT</strong>, control de acceso por roles (Admin, Doctor, Paciente), agendamiento de turnos, gestión doctor-paciente, búsqueda por especialidad y gestión de usuarios. Usa <strong>MongoDB</strong> y sigue arquitectura <strong>MVC</strong>.'
+                desc: 'Sistema de gestión de turnos médicos construido con <strong>Node.js</strong> y <strong>Express</strong>. Soporta acceso por roles (Admin, Doctor, Paciente), flujos de agendamiento y gestión estructurada doctor-paciente. Usa <strong>MongoDB</strong> para persistencia de datos y sigue arquitectura <strong>MVC</strong>.',
+                objective: '<strong>Objetivo:</strong> Diseñar un sistema de gestión de turnos seguro y estructurado con límites de roles claros y separación de responsabilidades mantenible.'
             },
             library: {
                 title: 'API de Biblioteca Personal',
-                desc: 'API REST para gestionar una biblioteca personal de libros construida con <strong>Node.js</strong> y <strong>Express</strong>. Incluye operaciones CRUD completas con arquitectura en capas, búsqueda avanzada con filtros combinables y paginación. Integra <strong>Google Books API</strong> para importar títulos, prevención de duplicados, sistema de valoración (0-5) y seguimiento de estado de lectura. Usa <strong>MongoDB</strong> con <strong>Mongoose</strong> y arquitectura <strong>MVC</strong> con patrón repositorio.'
+                desc: 'API REST para gestionar una biblioteca personal de libros construida con <strong>Node.js</strong> y <strong>Express</strong>. Incluye filtrado avanzado, paginación, importación externa de libros vía <strong>Google Books API</strong> y modelado de datos estructurado con <strong>MongoDB</strong> y <strong>Mongoose</strong>.',
+                objective: '<strong>Objetivo:</strong> Construir una API modular y extensible con separación clara entre lógica de negocio y acceso a datos, permitiendo consultas flexibles y evolución mantenible del sistema.'
             },
             inProgress: 'En Progreso',
             viewCode: 'Ver Código',
