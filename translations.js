@@ -11,7 +11,7 @@ const translations = {
         home: {
             greeting: 'Hi, I\'m <span>Leandro</span>',
             title: 'Backend Developer',
-            description: 'Backend Developer who approaches development from a systems and product perspective. I design backend solutions with scalability and real-world usage in mind, while keeping implementation practical and efficient. I value clear structure, separation of concerns, and solid database design. My goal is to build reliable backend systems that support business growth without slowing down execution.',
+            description: 'I\'m interested in approaching development from a systems and product perspective. I design backend solutions with scalability and real-world usage in mind, while keeping implementation practical and efficient. I value clear structure, separation of concerns, and solid database design. My goal is to build reliable backend systems that support business growth while maintaining development agility.',
             contactMe: 'Contact Me',
             downloadCV: 'Download CV'
         },
@@ -102,8 +102,8 @@ const translations = {
         },
         home: {
             greeting: 'Hola, soy <span>Leandro</span>',
-            title: 'Backend Developer',
-            description: 'Backend Developer que aborda el desarrollo desde una perspectiva de sistemas y producto. Diseño soluciones backend pensando en escalabilidad y uso real, manteniendo la implementación práctica y eficiente. Valoro la estructura clara, la separación de responsabilidades y un diseño de base de datos sólido. Mi objetivo es construir sistemas backend confiables que apoyen el crecimiento del negocio sin frenar la ejecución.',
+            title: 'Desarrollador Backend',
+            description: 'Me interesa abordar el desarrollo desde una perspectiva de sistemas y producto. Diseño soluciones backend pensando en su escalabilidad y uso real, manteniendo la implementación práctica y eficiente. Valoro la estructura clara, la separación de responsabilidades y un diseño de base de datos sólido. Mi objetivo es construir sistemas backend confiables que acompañen el crecimiento del negocio, manteniendo agilidad en el desarrollo.',
             contactMe: 'Contactarme',
             downloadCV: 'Descargar CV'
         },
